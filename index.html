@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraWeather | Premium Forecasts</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="weather-app-container">
+        <!-- SEARCH & LOCATION HEADER -->
+        <header class="app-search-header">
+            <div class="search-form-wrapper">
+                <div class="search-input-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="citySearchInput" placeholder="Search for a city..." autocomplete="off">
+                    <button id="clearSearchBtn" class="clear-btn" style="display: none;">✕</button>
+                </div>
+                <button id="useLocationBtn" class="location-btn" title="Use Current Location">
+                    <span class="location-icon">📍</span>
+                </button>
+                <!-- Geocoding Autocomplete Dropdown List -->
+                <div class="search-suggestions" id="searchSuggestions" style="display: none;">
+                    <!-- Suggested cities will render here dynamically -->
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN WEATHER CONTENT -->
+        <main class="app-weather-main" id="weatherContent" style="display: none;">
+            <!-- CURRENT CONDITIONS OVERVIEW -->
+            <section class="current-weather-panel glass-panel">
+                <div class="current-header">
+                    <div class="location-info">
+                        <h1 id="cityName">London</h1>
+                        <p class="country-tag" id="countryName">United Kingdom</p>
+                        <p class="local-time" id="localTime">Monday, 04:00 PM</p>
+                    </div>
+                    <div class="weather-status">
+                        <div class="weather-icon-large" id="currentWeatherIcon">☀️</div>
+                        <p class="weather-desc" id="currentWeatherDesc">Clear Sky</p>
+                    </div>
+                </div>
+                <div class="current-stats">
+                    <div class="main-temp-block">
+                        <span class="temp-val" id="currentTemp">21</span>
+                        <span class="temp-unit">°C</span>
+                    </div>
+                    <div class="high-low-block">
+                        <span>High: <strong id="currentHigh">23°</strong></span> • 
+                        <span>Low: <strong id="currentLow">14°</strong></span>
+                    </div>
+                </div>
+                
+                <!-- METRIC GRID -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-emoji">💧</span>
+                        <div class="metric-info">
+                            <span class="metric-label">Humidity</span>
+                            <span class="metric-value" id="humidityVal">62%</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-emoji">💨</span>
+                        <div class="metric-info">
+                            <span class="metric-label">Wind</span>
+                            <span class="metric-value" id="windVal">14 km/h</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-emoji">☀️</span>
+                        <div class="metric-info">
+                            <span class="metric-label">Wind Direction</span>
+                            <span class="metric-value" id="uvVal">ENE (70°)</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-emoji">🧭</span>
+                        <div class="metric-info">
+                            <span class="metric-label">Air Pressure</span>
+                            <span class="metric-value" id="pressureVal">1018 hPa</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HOURLY FORECAST SLIDER -->
+            <section class="hourly-forecast-panel glass-panel">
+                <h2 class="panel-title">Hourly Forecast (Next 24 Hours)</h2>
+                <div class="hourly-scroll-container" id="hourlyContainer">
+                    <!-- Hourly items will go here -->
+                </div>
+            </section>
+
+            <!-- 5-DAY OUTLOOK TABLE -->
+            <section class="daily-forecast-panel glass-panel">
+                <h2 class="panel-title">5-Day Outlook</h2>
+                <div class="daily-forecast-container" id="dailyContainer">
+                    <!-- Daily items will go here -->
+                </div>
+            </section>
+        </main>
+
+        <!-- INITIAL WELCOME SCREEN (Shown before first search) -->
+        <section class="welcome-panel glass-panel" id="welcomePanel">
+            <div class="welcome-icon">🌤️</div>
+            <h2>Welcome to AuraWeather</h2>
+            <p>Search for a city above or tap the location button to load real-time dynamic forecasts.</p>
+        </section>
+
+        <!-- LOADING INDICATOR STATE OVERLAY -->
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="spinner-container">
+                <div class="loader-ring"></div>
+                <p>Retrieving weather forecast data...</p>
+            </div>
+        </div>
+
+        <!-- ERROR STATE CARD -->
+        <div class="error-panel glass-panel" id="errorPanel" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <h3>Unable to retrieve weather</h3>
+            <p id="errorText">City not found. Please try a different location or check your spelling.</p>
+            <button class="btn-retry" id="errorCloseBtn">Dismiss</button>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
